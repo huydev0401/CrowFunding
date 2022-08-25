@@ -11,6 +11,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { IconEyeToggle } from "components/icons";
 import useToggleValue from "hooks/useToggleValue";
+import ButtonGoogle from "components/button/ButtonGoogle";
 
 const schema = yup
   .object({
@@ -31,8 +32,8 @@ const SignUpPage = () => {
     control,
     handleSubmit,
     formState: { isValid, isSubmitting, errors },
-  } = useForm({ mode: "onSubmit", resolver: yupResolver(schema) });
-  const handleSubmitForm = (value) => {
+  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
+  const handleSignUp = (value) => {
     if (!isValid) return;
     console.log(value);
   };
@@ -44,20 +45,15 @@ const SignUpPage = () => {
     <LayoutAuthentication heading="Sign Up">
       <p className="mb-8 text-xs text-center text-text3 lg:text-sm lg:mb-6">
         Already have an account?{" "}
-        <Link className="font-medium underline text-primary" to="/sign-up">
+        <Link to="/sign-in" className="font-medium underline text-primary">
           Sign in
         </Link>
       </p>
-      <button className="flex items-center justify-center w-full py-4 mb-5 border rounded-lg gap-x-3 border-stroke dark:border-darkStroke">
-        <img src="./icon-google.svg" alt="icon google" />
-        <p className="font-semibold lg:text-base dark:text-white">
-          Sign up with google
-        </p>
-      </button>
+      <ButtonGoogle></ButtonGoogle>
       <p className="mx-auto mb-4 text-xs text-center lg:text-base lg:mb-8 dark:text-white">
         Or sign up with email
       </p>
-      <form onSubmit={handleSubmit(handleSubmitForm)}>
+      <form onSubmit={handleSubmit(handleSignUp)}>
         <FieldGroup>
           <Label htmlFor="name">Full Name *</Label>
           <Input

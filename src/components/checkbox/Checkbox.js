@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "utils/classNames";
 
 const Checkbox = ({
   checked = false,
@@ -10,11 +11,12 @@ const Checkbox = ({
   return (
     <div className="flex items-start gap-x-5">
       <div
-        className={`select-none inline-flex items-center justify-center w-5 h-5 border rounded text-white cursor-pointer ${
+        className={classNames(
+          "select-none inline-flex items-center justify-center w-5 h-5 border rounded text-white cursor-pointer",
           checked
             ? "bg-primary border-primary"
             : "border-stroke dark:border-text3"
-        }`}
+        )}
         onClick={onClick}
       >
         <input type="text" className="hidden" onChange={() => {}} name={name} />
